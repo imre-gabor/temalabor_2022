@@ -1,5 +1,6 @@
 package hu.bme.temalabor.webshop.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.EntityGraph;
@@ -15,4 +16,9 @@ public interface CategoryRepository extends JpaRepository<Category, Integer>{
     @EntityGraph(attributePaths = "products")
     @Query("SELECT c FROM Category c WHERE c.name = :categoryName")
     Optional<Category> findByNameWithProducts(String categoryName);
+
+    
+    @EntityGraph(attributePaths = "products")
+    @Query("SELECT c FROM Category c")
+    List<Category> findAllWithProducts();
 }
